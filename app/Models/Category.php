@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    const STATUS_ACTIVE = 1;
+
+    public function scopeIsActive($query) {
+        $query->where('status', static::STATUS_ACTIVE);
+    }
 }

@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Http\Resources\CategoryResource;
+use App\Helpers\ResponseFormatter;
+use App\Helpers\Message;
 
 class CategoryController extends Controller
 {
+
+    use Message;
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +19,15 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $models = Category::isActive()->get();
+            $data = CategoryResource::collection($models);
+            return ResponseFormatter::success($data, $this->STATUS_SUCCESS_GET_DATA);
+        } catch (\Throwable $th) {
+            return ResponseFormatter::error(null, $th->getMessage());
+        }
+
+        
     }
 
     /**
