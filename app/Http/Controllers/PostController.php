@@ -29,8 +29,11 @@ class PostController extends Controller
                 $models = $models->take($request->take);
             }
 
-            if($request->category_id != null) {
-                $models = $models->where('category_id', $request->category_id);
+            if($request->category != null) {
+                $cat = $request->category;
+                $models = $models->whereHas('category', function($query) use ($cat) {
+                    $query->where('slug', $cat);
+                });
             }
 
             if($request->type == 'trending') {
