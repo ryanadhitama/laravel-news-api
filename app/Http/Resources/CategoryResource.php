@@ -17,7 +17,7 @@ class CategoryResource extends JsonResource
         return [
             "name"=>$this->name,
             "slug"=>$this->slug, 
-            "image" => asset('img/category/'.$this->image)
+            "image" => $this->getImage()
         ];
     }
 }

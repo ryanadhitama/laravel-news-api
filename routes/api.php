@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('post/{slug}', [PostController::class, 'show'])->name('posts.show');
+Route::get('posts', [PostController::class, 'index'])->name('posts.index');

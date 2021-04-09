@@ -14,4 +14,10 @@ class Category extends Model
     public function scopeIsActive($query) {
         $query->where('status', static::STATUS_ACTIVE);
     }
+
+    public function getImage()
+    {
+        $path   = '/img/category/';
+        return url($path.$this->image);
+    }
 }
